@@ -1,24 +1,16 @@
-let roman = {
-    "I": 1,
-    "V": 5,
-    "X": 10,
-    "L": 50,
-    "C": 100,
-    "D": 500,
-    "M": 1000,
-}
+let merge = function (nums1, m, nums2, n) {
+    let firstLength = m - 1
+    let secondLength = n - 1
+    let globalLength = m + n - 1
 
-let romanToInteger = function (str) {
-    let count = 0
-
-    for (let i = 0; i < str.length; ++i) {
-        if (roman[str[i]] < roman[str[i + 1]]) {
-            count -= roman[str[i]] // 0 - I(1) = -1
+    while (secondLength >= 0) {
+        if (nums1[firstLength] > nums2[secondLength]) {
+            nums1[globalLength] = nums1[firstLength]
+            firstLength--
         } else {
-            count += roman[str[i]] // -1 + X(10) = 9
+            nums1[globalLength] = nums2[secondLength]
+            secondLength--
         }
+        globalLength--
     }
-
-    return count
 }
-
